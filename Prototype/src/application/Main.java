@@ -34,6 +34,7 @@ public class Main extends Application {
     private int dataLogged;
     private String [] userStoryNames = new String [10];
     private int userStoryIndex;
+    private int userStoryCount = 0;
     private boolean admin;
 	
 	/*
@@ -139,7 +140,7 @@ public void planningPokerFirstRound (Stage primaryStage) {
     grid.setPadding(new Insets(20, 20, 20, 20));
 
     // Field to enter task info
-    Label taskLabel = new Label("User Story: \"" + userStoryNames[0] + "\"");
+    Label taskLabel = new Label("User Story: \"" + userStoryNames[userStoryCount] + "\"");
     
     // Dropdown box to enter estimate
     Label estimateLabel = new Label("Estimate:");
@@ -161,12 +162,14 @@ public void planningPokerFirstRound (Stage primaryStage) {
     // Print out info when button is clicked
     Button logButton = new Button("Log Effort");
     logButton.setOnAction(event -> {
+    	userStoryCount++;
         String task = userStoryNames[0];
         String estimate = estimateComboBox.getValue();
         // Store task and estimate data (you can use a data structure or database here)
         System.out.println("Task: " + task + ", Estimate: " + estimate);
         effortsLogged++;
         estimateComboBox.getSelectionModel().clearSelection();
+        planningPokerFirstRound (primaryStage);
     });
     
     Button backButton = new Button ("Back");
